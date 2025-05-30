@@ -1,0 +1,4 @@
+<endpoints xmlns='http://java.sun.com/xml/ns/jax-ws/ri/runtime' version='2.0'>
+	<endpoint name='requisicaoCertificaoDigitalEndpoint' implementation='br.com.m3Tech.solucoesFromtis.certificadora.webservices.requisicao.impl.RequisicaoCertificacaoDigitalImpl' url-pattern='/soap/requisicaoCertificacaoDigital'/>
+	<endpoint name='retornoCertificacaoDigitalEndpoint' implementation='br.com.m3Tech.solucoesFromtis.certificadora.webservices.retorno.impl.RetornoCertificacaoDigitalServiceImpl' url-pattern='/soap/retornoCertificacaoDigital'/>
+</endpoints>

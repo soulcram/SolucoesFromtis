@@ -75,7 +75,7 @@ public class ExecucoesAutomaticas {
 
 			Connection con = Conexao.getConnection(base);
 			
-			List<DadosOperacaoParaAprovacaoDto> allOperacoesAguardandoConsultoria = operacaoRecebivelService.findAllOperacoesAguardandoAprovacao(con, "PO");
+			List<DadosOperacaoParaAprovacaoDto> allOperacoesAguardandoConsultoria = operacaoRecebivelService.findAllOperacoesAguardandoAprovacao(base, "PO");
 			
 			if(allOperacoesAguardandoConsultoria.isEmpty()) {
 				return;
@@ -83,7 +83,7 @@ public class ExecucoesAutomaticas {
 
 			logger.info("Iniciando aprovações da consultoria automático");
 			
-			ParametrosCadastrosAutomaticos param = new ParametrosCadastrosAutomaticos(confGlobal.getUrlPortalServicos(), 
+			ParametrosCadastrosAutomaticos param = new ParametrosCadastrosAutomaticos(confGlobal.getUrlPortalServicos(), "",
 					confGlobal.getUsuarioPortalServicos(), 
 					confGlobal.getSenhaPortalServicos(), 
 					null,
@@ -92,13 +92,11 @@ public class ExecucoesAutomaticas {
 			
 			AprovarConsultoriaPortalServicos service = new AprovarConsultoriaPortalServicos();
 			
-			allOperacoesAguardandoConsultoria.forEach(o -> {
+		
 				
-				String msg = service.executar(param, o);
+			service.executar(param, allOperacoesAguardandoConsultoria);
 				
-				logger.info(msg);
-				
-			});
+	
 
 			logger.info("Fim das aprovações da consultoria automático");
 			
@@ -143,7 +141,7 @@ public class ExecucoesAutomaticas {
 
 			Connection con = Conexao.getConnection(base);
 			
-			List<DadosOperacaoParaAprovacaoDto> allOperacoesAguardandoGestor = operacaoRecebivelService.findAllOperacoesAguardandoAprovacao(con, "PG");
+			List<DadosOperacaoParaAprovacaoDto> allOperacoesAguardandoGestor = operacaoRecebivelService.findAllOperacoesAguardandoAprovacao(base, "PG");
 			
 			if(allOperacoesAguardandoGestor.isEmpty()) {
 				return;
@@ -151,7 +149,7 @@ public class ExecucoesAutomaticas {
 
 			logger.info("Iniciando aprovações do Gestor automático");
 			
-			ParametrosCadastrosAutomaticos param = new ParametrosCadastrosAutomaticos(confGlobal.getUrlPortalServicos(), 
+			ParametrosCadastrosAutomaticos param = new ParametrosCadastrosAutomaticos(confGlobal.getUrlPortalServicos(), "",
 					confGlobal.getUsuarioPortalServicos(), 
 					confGlobal.getSenhaPortalServicos(), 
 					null,
@@ -160,13 +158,7 @@ public class ExecucoesAutomaticas {
 			
 			AprovarGestorPortalServicos service = new AprovarGestorPortalServicos();
 			
-			allOperacoesAguardandoGestor.forEach(o -> {
-				
-				String msg = service.executar(param, o);
-				
-				logger.info(msg);
-				
-			});
+			service.executar(param, allOperacoesAguardandoGestor);
 
 			logger.info("Fim das aprovações do Gestor automático");
 			
@@ -211,7 +203,7 @@ public class ExecucoesAutomaticas {
 
 			Connection con = Conexao.getConnection(base);
 			
-			List<DadosRetornoCertificadoDigitalDto> findAllOperacoesAguardandoRetorno = operacaoRecebivelService.findAllOperacoesAguardandoRetorno(con);
+			List<DadosRetornoCertificadoDigitalDto> findAllOperacoesAguardandoRetorno = operacaoRecebivelService.findAllOperacoesAguardandoRetorno(base);
 			
 			if(findAllOperacoesAguardandoRetorno.isEmpty()) {
 				return;
@@ -219,7 +211,7 @@ public class ExecucoesAutomaticas {
 
 			logger.info("Iniciando envio do Retorno Certificadora automático");
 			
-			ParametrosCadastrosAutomaticos param = new ParametrosCadastrosAutomaticos(confGlobal.getUrlPortalServicos(), 
+			ParametrosCadastrosAutomaticos param = new ParametrosCadastrosAutomaticos(confGlobal.getUrlPortalServicos(), "",
 					confGlobal.getUsuarioPortalServicos(), 
 					confGlobal.getSenhaPortalServicos(), 
 					null,
